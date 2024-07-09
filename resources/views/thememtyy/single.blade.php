@@ -16,209 +16,144 @@
 @endphp
 
 @section('content')
-    <script>
-        var body = document.body;
-        body.classList.add("view");
-        body.classList.add("page");
-    </script>
-
-    <main id="main" class="wrapper">
-        <div class="content">
-            @if ($currentMovie->notify || $currentMovie->showtimes)
-                <div class="box view-heading">
-                    @if ($currentMovie->showtimes)
-                        <p><strong>Lịch chiếu : </strong> {{$currentMovie->showtimes}}</p>
-                    @endif
-                    @if ($currentMovie->notify )
-                        <p><strong>Thông báo : </strong> {{$currentMovie->notify}}</p>
-                    @endif
+    <div class="ds-vod-detail rel">
+        <div class="box-width rel">
+            <div class="this-bj">
+                <div class="this-pic-bj"
+                     style="background-image: url('{{ $currentMovie->getPosterUrl() }}')"></div>
+                <div class="large-t"></div>
+                <div class="large-r"></div>
+                <div class="large-l"></div>
+                <div class="large-b"></div>
+            </div>
+            <div class="slide-desc-box">
+                <div class="this-desc-title">{{ $currentMovie->name }}</div>
+                <div class="this-desc-labels flex">
+                    <span class="this-tag this-b"><i class="focus-item-label-rank">Năm</i>{{ $currentMovie->publish_year }}</span>
+                    <span class="focus-item-label-original this-tag bj2">{{$currentMovie->getStatus()}}</span>
                 </div>
-            @endif
-            <div class="box view-heading">
-                <div class="mobile-play">
-                    <div class="module-item-cover">
-                        <div class="module-item-pic"><img class="lazyload"
-                                                          data-src="{{ $currentMovie->getThumbUrl() }}"
-                                                          src="{{ asset('/themes/dy/templets/image/loading.gif') }}">
-                        </div>
-                    </div>
+                <div class="this-desc-info">
+                    <span class="this-desc-score cor6"><i class="ds-shoucang fa"></i> {{$currentMovie->getRatingStar()}}</span>
+                    {!! $currentMovie->regions->map(function ($region) {
+                       return '<span>' . $region->name . '</span>';
+                   })->implode('') !!}
+                    <span>{{$currentMovie->episode_current}}</span>
                 </div>
-                <div class="video-cover">
-                    <div class="module-item-cover">
-                        <div class="module-item-pic"><a href="{{ $watch_url }}"
-                                                        title="Xem phim {{ $currentMovie->name }}"><i
-                                        class="icon-play"></i></a><img class="lazyload" alt="{{ $currentMovie->name }}"
-                                                                       data-src="{{ $currentMovie->getThumbUrl() }}"
-                                                                       src="{{ asset('/themes/dy/templets/image/loading.gif') }}">
-                            <div class="loading"></div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="video-info">
-                    <div class="video-info-header">
-                        <h1 class="page-title">{{ $currentMovie->name }}</h1>
-                        <h2 class="video-subtitle">{{ $currentMovie->originName }}</h2>
-
-                        <div class="video-info-aux">
-                            <div class="tag-link">{{ $currentMovie->publish_year }}
+                <style>
+                    .play-sc {
+                        cursor: pointer;
+                        border-radius: 4px;
+                        padding: 14px 20px;
+                        width: 380px;
+                        margin: 10px 0 15px 0;
+                        font-weight: 700;
+                        background: hsla(0, 0%, 100%, .1);
+                    }
+                </style>
+                <div class="detail-score wow fadeInUp">
+                    <div class="play-sc cf">
+                        <div class="rating-content">
+                            <div id="movies-rating-star" style="height: 18px;"></div>
+                            <div>
+                                ({{$currentMovie->getRatingStar()}}
+                                sao
+                                /
+                                {{$currentMovie->getRatingCount()}} đánh giá)
                             </div>
-                            {!! $currentMovie->regions->map(function ($region) {
-                        return '<div class="tag-link"><a href="' . $region->getUrl() . '" title="' . $region->name . '">' . $region->name . '</a> </div>';
-                    })->implode('') !!}
+                            <div id="movies-rating-msg"></div>
                         </div>
-                        <a href="{{ $watch_url }}" class="btn-important btn-large shadow-drop video-info-play"
-                           title="Xem phim {{ $currentMovie->name }}"><i class="icon-play"></i><strong>Xem phim</strong></a>
-                        @if ($currentMovie->trailer_url && strpos($currentMovie->trailer_url, 'youtube'))
-                            @php
-                                parse_str( parse_url( $currentMovie->trailer_ur, PHP_URL_QUERY ), $my_array_of_vars );
-                                $video_id = $my_array_of_vars['v'] ?? null;
-                            @endphp
-                            <a href="https://www.youtube.com/embed/{{$video_id}}" data-preload="false"
-                               class="btn-important btn-large shadow-drop video-info-play fancybox fancybox.iframe"
-                               title="{{ $currentMovie->name }}"><i class="icon-play"></i><strong>Trailer</strong></a>
-                        @endif
-
                     </div>
-                    <div class="video-info-main">
-                        <div class="video-info-items"><span class="video-info-itemtitle" style="min-width: 100px;">Đạo diễn：</span>
-                            <div class="video-info-item video-info-actor"><span class="slash">/</span> {!! $currentMovie->directors->map(function ($director) {
+                </div>
+                <div class="this-info">
+                    <strong class="r6">Đạo diễn:</strong>
+                    {!! $currentMovie->directors->map(function ($director) {
                         return '<a href="' . $director->getUrl() . '" title="' . $director->name . '">' . $director->name . '</a>';
                     })->implode(', ') !!}
-                            </div>
-                        </div>
-                        <div class="video-info-items"><span class="video-info-itemtitle" style="min-width: 100px;">Diễn viên：</span>
-                            <div class="video-info-item video-info-actor"><span class="slash">/</span>{!! $currentMovie->actors->map(function ($director) {
+
+                </div>
+                <div class="this-info">
+                    <strong class="r6">Diễn viên:</strong> {!! $currentMovie->actors->map(function ($director) {
                         return '<a href="' . $director->getUrl() . '" title="' . $director->name . '">' . $director->name . '</a>';
                     })->implode(', ') !!}
-                            </div>
-                        </div>
-                        <div class="video-info-items"><span class="video-info-itemtitle">Trạng thái：</span>
-                            <div class="video-info-item"> {{$currentMovie->getStatus()}}
-                                | {{$currentMovie->episode_current}} | {{$currentMovie->episode_total}} </div>
-                        </div>
-                        <div class="video-info-items"><span class="video-info-itemtitle">Thời lượng：</span>
-                            <div class="video-info-item">{{$currentMovie->episode_time}}</div>
-                        </div>
-                        <div class="video-info-items"><span class="video-info-itemtitle">Ngôn ngữ：</span>
-                            <div class="video-info-item">{{ $currentMovie->language }} {{ $currentMovie->quality }}</div>
-                        </div>
-                        <div class="video-info-items"><span class="video-info-itemtitle"
-                                                            style="width: 100px;">Nội dung：</span>
-                            <div class="video-info-item video-info-content">   @if ($currentMovie->content)
-                                    {!! strip_tags($currentMovie->content) !!}
-                                @endif</div>
-                        </div>
-                        <p>{!! $currentMovie->tags->map(function ($tag) {
-                        return '<a href="' . $tag->getUrl() . '" title="' . $tag->name . '">' . $tag->name . '</a>';
-                    })->implode(', ') !!}</p>
+                </div>
+                <div class="this-desc">
+                    <div id="height_limit" class="text">
+                        <strong class="r6">Nội dung:</strong>　
+                        　 {!! strip_tags($currentMovie->content) !!}
                     </div>
+                    <div class="text-open">
+                        <span class="tim-bnt"><i class="fa r6 ease"></i>Xem thêm</span>
+                    </div>
+                </div>
+                <div class="this-bnt flex">
+                    @if($watch_url)
+                        <a href="{{ $watch_url }}" class="vod-detail-bnt this-play this-bnt-a cr5"><i
+                                class="fa r6 ds-bofang1"></i>Xem phim</a>
+                    @endif
+                    @if ($currentMovie->trailer_url && strpos($currentMovie->trailer_url, 'youtube'))
+                        @php
+                            parse_str( parse_url( $currentMovie->trailer_url, PHP_URL_QUERY ), $my_array_of_vars );
+                            $video_id = $my_array_of_vars['v'] ?? null;
+                        @endphp
+                        <a href="https://www.youtube.com/embed/{{$video_id}}"
+                           class="this-play this-bnt-a cr5 fancybox fancybox.iframe"><i
+                                class="fa r6 ds-bofang1"></i>Trailer</a>
 
-                    <div class="video-info-footer display">
-                        <a href="{{ $watch_url }}" class="btn-important btn-large shadow-drop"
-                           title="{{ $currentMovie->name }}"><i class="icon-play"></i><strong>Xem phim</strong></a>
-                        @if ($currentMovie->trailer_url && strpos($currentMovie->trailer_url, 'youtube'))
-                            @php
-                                parse_str( parse_url( $currentMovie->trailer_url, PHP_URL_QUERY ), $my_array_of_vars );
-                                $video_id = $my_array_of_vars['v'] ?? null;
-                            @endphp
-                            <a href="https://www.youtube.com/embed/{{$video_id}}" data-preload="false"
-                               class="btn-important btn-large shadow-drop fancybox fancybox.iframe"
-                               title="{{ $currentMovie->name }}"><i class="icon-play"></i><strong>Trailer</strong></a>
-                        @endif
-                    </div>
+                    @endif
+
                 </div>
             </div>
-            <div class="module module-wrapper">
-                <div class="module-main">
-                    <div class="rating-content">
-                        <div id="movies-rating-star" style="height: 18px;"></div>
-                        <div>
-                            ({{$currentMovie->getRatingStar()}}
-                            sao
-                            /
-                            {{$currentMovie->getRatingCount()}} đánh giá)
-                        </div>
-                        <div id="movies-rating-msg"></div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="module module-wrapper">
-                <div class="module-main">
-                    <div class="module-heading"><h2 class="module-title" title="Có thể bạn thích">Bình luận</h2>
-                    </div>
-                    <div class="module-list module-lines-list">
-                        <div style="width: 100%; background-color: #fff">
-                            <div class="fb-comments w-full" data-href="{{ $currentMovie->getUrl() }}" data-width="100%"
-                                 data-numposts="5" data-colorscheme="light" data-lazy="true">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="module-heading" style="margin-top: 10px"><h2 class="module-title"
-                                                                             title="Có thể bạn thích">Có thể bạn
-                            thích</h2>
-                    </div>
-
-                    <div class="module-list module-lines-list">
-                        <div class="module-items">
-                            @foreach ($movie_related as $movie)
-                                @include('themes::thememtyy.inc.section.movie_card')
-                            @endforeach
-                        </div>
-                    </div>
-                </div>
-                <div class="module-side">
-                    <div class="module-heading"><h2 class="module-title">Xem nhiều</h2></div>
-                    <div class="module-side-list module-bg">
-                        <div class="scroll-box">
-                            <div class="module-textlist scroll-content">
-                                @php
-                                    $key = 0;
-                                @endphp
-                                @foreach ($movie_related_top as $movie)
-                                    @php
-                                        $key++;
-                                    switch ($key) {
-                                        case 1:
-                                            $class_top = 'top-1';
-                                            break;
-                                        case 2:
-                                            $class_top = 'top-2';
-                                            break;
-                                        case 3:
-                                            $class_top = 'top-3';
-                                            break;
-                                        default:
-                                            $class_top = '';
-                                            break;
-                                            }
-                                    @endphp
-                                    <a href="{{$movie->getUrl()}}"
-                                       class="text-list-item">
-                                        <div class="text-list-num top-main <?= $class_top ?>"><?= $key ?></div>
-                                        <div class="text-list-title"><h3>{{$movie->name}}</h3>
-                                            <p>Lượt xem : {{$movie->view_total}}</p></div>
-                                    </a>
-                                @endforeach
-
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-
-            </div>
-
         </div>
-    </main>
+    </div>
 
-
-
+    <div class="box-width tv4 wow fadeInUp wr-list">
+        <div class="title top10">
+            <h4 class="title-h cor4">Bình luận</h4>
+        </div>
+        <div class="flex wrap border-box public-r hide-b-12">
+            <div style="width: 100%; background-color: #fff;margin-top: 10px">
+                <div class="fb-comments w-full" data-href="{{ $currentMovie->getUrl() }}" data-width="100%"
+                     data-numposts="5" data-colorscheme="light" data-lazy="true">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="box-width tv4 wow fadeInUp wr-list">
+        <div class="title top10">
+            <h4 class="title-h cor4">Đề xuất</h4>
+        </div>
+        <div class="flex wrap border-box public-r hide-b-12">
+            <div class="ds-r-hide list-swiper-b">
+                <div class="swiper-wrapper">
+                    @foreach ($movie_related as $movie)
+                        <div class="public-list-box public-pic-b swiper-slide">
+                            <div class="public-list-div public-list-bj">
+                                <a target="_self" class="public-list-exp" href="{{$movie->getUrl()}}"
+                                   title="{{$movie->name}}">
+                                    <img class="lazy lazy1 gen-movie-img mask-0" referrerpolicy="no-referrer"
+                                         src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="
+                                         alt="{{$movie->name}} {{ $movie->origin_name }}"
+                                         data-src="{{$movie->getThumbUrl()}}">
+                                    <span class="public-bg"></span>
+                                    <span class="public-list-prb hide ft2">{{$movie->language}} {{$movie->quality}}</span>
+                                    <span class="public-play"><i
+                                            class="fa ds-bofang1"></i></span>
+                                </a>
+                            </div>
+                            <div class="public-list-button">
+                                <a target="_self" class="time-title hide ft4" href="{{$movie->getUrl()}}"
+                                   title="{{$movie->name}}">{{$movie->name}}</a>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+                <a class="swiper-button-prev fa ds-fanhui" href="javascript:"></a><a
+                    class="swiper-button-next fa ds-jiantouyou" href="javascript:"></a></div>
+        </div>
+    </div>
     @push('scripts')
-        <script src="{{ asset('/themes/dy/plugins/jquery-raty/jquery.raty.js') }}"></script>
-        <link href="{{ asset('/themes/dy/plugins/jquery-raty/jquery.raty.css') }}" rel="stylesheet" type="text/css"/>
+        <script src="{{ asset('/themes/mtyy/plugins/jquery-raty/jquery.raty.js') }}"></script>
+        <link href="{{ asset('/themes/mtyy/plugins/jquery-raty/jquery.raty.css') }}" rel="stylesheet" type="text/css"/>
         <script>
             var rated = false;
             $('#movies-rating-star').raty({
@@ -228,9 +163,9 @@
                 hints: ['quá tệ', 'tệ', 'không hay', 'không hay lắm', 'bình thường', 'xem được', 'có vẻ hay', 'hay',
                     'rất hay', 'siêu phẩm'
                 ],
-                starOff: '{{ asset('/themes/dy/plugins/jquery-raty/images/star-off.png') }}',
-                starOn: '{{ asset('/themes/dy/plugins/jquery-raty/images/star-on.png') }}',
-                starHalf: '{{ asset('/themes/dy/plugins/jquery-raty/images/star-half.png') }}',
+                starOff: '{{ asset('/themes/mtyy/plugins/jquery-raty/images/star-off.png') }}',
+                starOn: '{{ asset('/themes/mtyy/plugins/jquery-raty/images/star-on.png') }}',
+                starHalf: '{{ asset('/themes/mtyy/plugins/jquery-raty/images/star-half.png') }}',
                 click: function (score, evt) {
                     if (rated) return
                     fetch("{{ route('movie.rating', ['movie' => $currentMovie->slug]) }}", {
@@ -252,8 +187,8 @@
                 }
             });
         </script>
-        <script src="{{ asset('/themes/dy/source/jquery.fancybox.pack.js?v=2.1.5') }}"></script>
-        <link rel="stylesheet" type="text/css" href="{{ asset('/themes/dy/source/jquery.fancybox.css?v=2.1.5') }}"
+        <script src="{{ asset('/themes/mtyy/source/jquery.fancybox.pack.js?v=2.1.5') }}"></script>
+        <link rel="stylesheet" type="text/css" href="{{ asset('/themes/mtyy/source/jquery.fancybox.css?v=2.1.5') }}"
               media="screen"/>
         <script type="text/javascript">
             $(document).ready(function () {
