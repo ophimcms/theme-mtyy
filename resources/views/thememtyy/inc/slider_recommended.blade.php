@@ -19,15 +19,19 @@
                                 <div class="this-desc-info">
                                     <span class="this-desc-score cor6"><i
                                             class="ds-shoucang fa"></i> {{$movie->getRatingStar()}}</span>
-                                    <span>Năm</span>
-                                    <span>Quốc gia</span>
-                                    <span>Tập</span>
+                                    <span>{{ $movie->publish_year }}</span>
+                                    {!! $movie->regions->map(function ($region) {
+                       return '<span>' . $region->name . '</span>';
+                   })->implode('') !!}
+                                    <span>{{$movie->episode_total}}</span>
                                 </div>
                                 <div class="this-desc-tags">
-                                    <span>Liên quan</span>
+                                    {!! $movie->actors->map(function ($director) {
+                        return '  <span>' . $director->name . '</span>';
+                    })->implode('') !!}
                                 </div>
                                 <div class="this-desc-item">　　
-                                    Nội dung ngắn
+                                    {!! strip_tags($movie->content) !!}
                                 </div>
                             </div>
                         </div>
