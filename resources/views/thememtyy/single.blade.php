@@ -54,7 +54,7 @@
                     <div class="play-sc cf">
                         <div class="rating-content">
                             <div id="movies-rating-star" style="height: 18px;"></div>
-                            <div>
+                            <div style="margin-top: 5px">
                                 ({{$currentMovie->getRatingStar()}}
                                 sao
                                 /
