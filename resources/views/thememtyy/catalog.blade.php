@@ -8,43 +8,26 @@
             ->sortDesc();
     });
 @endphp
-
 @section('content')
-    <script>
-        var body = document.body;
-        body.classList.add("library");
-        body.classList.add("page");
-    </script>
-    <main id="main" class="wrapper">
-        <div class="content">
-            <div class="page-heading">
-                <div class="box">
-                    <div class="library-box library-box-first scroll-box ovauto">
-                        <div class="scroll-content">
-                            <div class="library-list"><a href="{{ url()->current() }}"
-                                                         class="library-item selected"
-                                                         title="{{ $section_name ?? 'Danh Sách Phim' }}">{{ $section_name ?? 'Danh Sách Phim' }}</a>
-                            </div>
-                        </div>
-                    </div>
-                    @include('themes::thememtyy.inc.catalog_filter')
-                </div>
+    <div style="display:none">{{ $section_name ?? 'Danh Sách Phim' }}</div>
+    <div class="box-width wow fadeInUp ec-casc-list animated" style="visibility: visible; animation-name: fadeInUp;">
+        <div class="title flex between top20">
+            <div class="title-left">
+                <h4 class="title-h cor4">{{ $section_name ?? 'Danh Sách Phim' }}</h4>
             </div>
-            <div class="module">
-                <div class="module-list">
-                    <div class="module-items">
-                        @if (count($data))
-                            @foreach ($data as $movie)
-                                @include('themes::thememtyy.inc.section.movie_card')
-                            @endforeach
-                        @else
-                            <p class="text-danger">Không có dữ liệu cho mục này</p>
-                        @endif
-                    </div>
-                </div>
-            </div>
-            {{ $data->appends(request()->all())->links("themes::thememtyy.inc.pagination") }}
         </div>
-    </main>
+        <div class="overflow">
+        </div>
+        <div class="flex wrap border-box public-r">
+            @if (count($data))
+                @foreach ($data as $movie)
+                    @include('themes::thememtyy.inc.section.movie_card')
+                @endforeach
+            @else
+                <p class="text-danger">Không có dữ liệu cho mục này</p>
+            @endif
 
+        </div>
+        {{ $data->appends(request()->all())->links("themes::thememtyy.inc.pagination") }}
+    </div>
 @endsection

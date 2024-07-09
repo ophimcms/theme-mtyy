@@ -1,31 +1,24 @@
-<div class="module-footer">
-    <div id="page">
+<div class="pages top20">
+    <div class="page-info">
         @if ($paginator->hasPages())
-
             @if ($paginator->onFirstPage())
             @else
-                <a href="{{ $paginator->previousPageUrl() }}" class="page-number page-previous"
-                   title="@lang('pagination.previous')"> Trang trước </a>
+                <a class="page-link fa ds-fanhui" href="{{ $paginator->previousPageUrl() }}"
+                   title="@lang('pagination.previous')"></a>
             @endif
-
             {{-- Pagination Elements --}}
             @foreach ($elements as $element)
                 {{-- "Three Dots" Separator --}}
                 @if (is_string($element))
-                    <a href=""
-                       class="page-number page-previous"
-                       style="display:none;"
-                       title="上一页">{{ $element }}</a>
-                @endif
 
+                @endif
                 {{-- Array Of Links --}}
                 @if (is_array($element))
                     @foreach ($element as $page => $url)
                         @if ($page == $paginator->currentPage())
-                            <span class="page-number page-current display">{{ $page }}</span>
+                            <a class="page-link ho" href="javascript:" title="{{ $page }}">{{ $page }}</a>
                         @else
-                            <a href="{{ $url }}" class="page-number display"
-                               title="{{ $page }}">{{ $page }}</a>
+                            <a class="page-link" href="{{ $url }}" title="{{ $page }}">{{ $page }}</a>
                         @endif
                     @endforeach
                 @endif
@@ -33,11 +26,12 @@
 
             {{-- Next Page Link --}}
             @if ($paginator->hasMorePages())
-                <a href="{{ $paginator->nextPageUrl() }}"
-                   class="page-number page-next"
-                   title="@lang('pagination.next')"> Trang sau </a>
+                <a class="page-link fa ds-jiantouyou" href="{{ $paginator->nextPageUrl() }}"
+                   title="@lang('pagination.next')"></a>
             @else
             @endif
         @endif
+
+
     </div>
 </div>
