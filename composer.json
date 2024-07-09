@@ -1,0 +1,32 @@
+{
+    "name": "ophimcms/theme-mtyy",
+    "description": "Ophim's mtyy theme",
+    "type": "library",
+    "authors": [
+        {
+            "name": "ophimcms",
+            "email": "dev@ophim.cc"
+        }
+    ],
+    "require": {
+        "laravel/framework": "^6|^7|^8",
+        "ckfinder/ckfinder-laravel-package": "v3.5.2.1",
+        "hacoidev/ophim-core": "^1.0.0"
+    },
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Ophim\\ThemeMTYY\\": "src/",
+            "Ophim\\ThemeMTYY\\Database\\Factories\\": "database/factories/",
+            "Ophim\\ThemeMTYY\\Database\\Seeders\\": "database/seeders/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+              "ThemeMTYYServiceProvider"
+            ]
+        }
+    },
+    "minimum-stability": "stable"
+}
