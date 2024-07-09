@@ -28,7 +28,7 @@
             <div class="tips-box radius none">
                 <div class="video-info-aux">
                     @foreach ($currentMovie->episodes->where('slug', $episode->slug)->where('server', $episode->server) as $server)
-                        <a onclick="chooseStreamingServer(this)" data-type="m3u8" id="streaming-sv"
+                        <a onclick="chooseStreamingServer(this)" data-type="{{ $server->type }}" id="streaming-sv"
                            data-id="{{ $server->id }}"
                            data-link="{{ $server->link }}" class="streaming-server tag-link "
                            style="background: #303033;color: #FFF;padding: 10px;border-radius: 10px;margin: 5px">
