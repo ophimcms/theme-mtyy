@@ -86,7 +86,7 @@
         <div class="right flex">
             <div class="search-min-box">
                 <form id="search" name="s" method="get" action="/">
-                    <input id="dsSoInput" type="text" name="s" value="{{ request('search') }}" placeholder="Tìm kiếm" onkeyup="fetch()"
+                    <input id="dsSoInput" type="text" name="search" value="{{ request('search') }}" placeholder="Tìm kiếm"
                            autocomplete="off"
                            class="input">
                     <button id="dsSo" type="submit" class="fa ds-sousuo"></button>
@@ -108,3 +108,30 @@
         <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span></div>
 </div>
 
+<script type="text/javascript">
+    $('#dsSoInput').on('keyup',function(){
+        $("#result").html('');
+        $value = $(this).val();
+        if(!$value){
+            $("#result").html('');
+            return;
+        }
+        $.ajax({
+            type: 'get',
+            url: '{{ URL::to('search') }}',
+            data: {
+                'search': $value
+            },
+            success:function(data){
+                $("#result").html('')
+                $.each(data, function(key, value){
+                    $('#result').append('<a href="'+value.slug+'"><div class="rowsearch"> <div class="column lefts"> <img src="'+value.image+'" width="50" /> </div> <div class="column rights"><p> '+value.title+' ' + '</p><p> '+value.original_title+'| '+value.year+' </p></div> </div></a>' )
+                });
+            }
+        });
+    })
+    document.body.addEventListener("click", function (event) {
+        $("#result").html('');
+    });
+    $.ajaxSetup({ headers: { 'csrftoken' : '{{ csrf_token() }}' } });
+</script>
