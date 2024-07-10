@@ -21,19 +21,19 @@ https://github.com/hacoidev/ophim-core
     + `Reset` reset lại toàn bộ cấu hình của themes
 ## Demo
 ### Trang Chủ
-![Alt text](https://i.ibb.co/YbNYS6j/home.png "Home Page")
+![Alt text](https://i.ibb.co/PYmSyxn/image.png "Home Page")
 
 ### Trang Danh Sách Phim
 
-![Alt text](https://i.ibb.co/zHvKYNS/category.png "Catalog Page")
+![Alt text](https://i.ibb.co/6XwN0Ld/image.png "Catalog Page")
 
 ### Trang Thông Tin Phim
 
-![Alt text](https://i.ibb.co/crwNVLy/image.png "Info Page")
+![Alt text](https://i.ibb.co/GVMTMpW/image.png "Info Page")
 
 ### Trang Xem Phim
 
-![Alt text](https://i.ibb.co/HKHBbfd/image.png "Episode Page")
+![Alt text](https://i.ibb.co/Df86zZL/image.png "Episode Page")
 
 ### Custom View Blade
 - File blade gốc trong Package: `/vendor/ophimcms/theme-mtyy/resources/views/thememtyy`
