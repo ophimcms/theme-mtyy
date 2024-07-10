@@ -3,53 +3,7 @@
     $brand = setting('site_brand', '');
     $title = isset($title) ? $title : setting('site_homepage_title', '');
 @endphp
-<style>
-    #result {
-        margin-top: 20px;
-        background-color: #333333;
-        list-style-type: none;
-        width: 500px;
-        position: absolute;
-        top: 32px;
-        z-index: 100;
-        padding-left: 0;
-    }
-
-    .column {
-        float: left;
-        padding: 5px;
-    }
-
-    .lefts {
-        text-align: center;
-        width: 20%;
-    }
-
-    .rights {
-        width: 80%;
-    }
-
-    .rowsearch:after {
-        content: "";
-        display: table;
-        clear: both;
-    }
-
-    #result .rowsearch {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-
-    #result .rowsearch p {
-        margin-bottom: 1px;
-    }
-
-    .rowsearch:hover {
-        background-color: #2d2d2d;
-    }
-</style>
-<div class="head head-c header_nav1" id="nav">
+<div class="head @hasSection('navclass') @yield('navclass') @else head-c @endif header_nav1" id="nav">
     <div class="this-pc flex between">
         <div class="left flex">
             <div class="logo">

@@ -38,6 +38,7 @@
 
 @push('header')
     <link href="{{ asset('/themes/mtyy/ds6/css/common_version%3D473.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('/themes/mtyy/ds6/css/custom.css') }}" rel="stylesheet" type="text/css">
     <script src="{{ asset('/themes/mtyy/ds6/js/jquery.js') }}"></script>
     <script src="{{ asset('/themes/mtyy/ds6/js/assembly.js') }}"></script>
     <script src="{{ asset('/themes/mtyy/ds6/js/swiper.min.js') }}"></script>

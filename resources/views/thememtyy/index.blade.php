@@ -101,6 +101,7 @@
         return $data;
     });
 @endphp
+@section('navclass', 'no-null')
 @section('slider_recommended')
     @if(count($home_page_slider_poster['data']))
         @include('themes::thememtyy.inc.slider_recommended')
