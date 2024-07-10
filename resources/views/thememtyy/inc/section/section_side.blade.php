@@ -23,10 +23,10 @@
                                  alt="{{$movie->name}}"
                                  data-src="{{$movie->getThumbUrl()}}">
                             <span class="public-bg"></span>
-                            <span class="public-list-prb hide ft2">
-               {{$movie->language}}    {{$movie->quality}}        </span>
-                            <span class="public-play"><i
-                                    class="fa ds-bofang1"></i></span>
+                            <span class="public-list-prb hide ft2">{{$movie->language}} {{$movie->quality}} </span>
+                            <span class="public-play">
+                                <i class="fa ds-bofang1"></i>
+                            </span>
                         </a>
                     </div>
                     <div class="public-list-button">
@@ -35,8 +35,8 @@
                 </div>
                 @endforeach
             </div>
-            <a class="swiper-button-prev fa ds-fanhui" href="javascript:"></a><a
-                class="swiper-button-next fa ds-jiantouyou" href="javascript:"></a>
+            <a class="swiper-button-prev fa ds-fanhui" href="javascript:"></a>
+            <a class="swiper-button-next fa ds-jiantouyou" href="javascript:"></a>
         </div>
     </div>
 </div>

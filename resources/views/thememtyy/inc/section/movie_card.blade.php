@@ -5,10 +5,10 @@
                  src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="
                  alt="{{$movie->name}} {{ $movie->origin_name }}" data-src="{{$movie->getThumbUrl()}}">
             <span class="public-bg"></span>
-            <span class="public-list-prb hide ft2">
-               {{$movie->language}}    {{$movie->quality}}        </span>
-            <span class="public-play"><i
-                    class="fa ds-bofang1"></i></span>
+            <span class="public-list-prb hide ft2">{{$movie->language}} {{$movie->quality}}</span>
+            <span class="public-play">
+                <i class="fa ds-bofang1"></i>
+            </span>
         </a>
     </div>
     <div class="public-list-button">

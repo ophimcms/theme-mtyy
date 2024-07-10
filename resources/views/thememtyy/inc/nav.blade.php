@@ -107,7 +107,6 @@
         </ul>
         <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span></div>
 </div>
-
 <script type="text/javascript">
     $('#dsSoInput').on('keyup',function(){
         $("#result").html('');

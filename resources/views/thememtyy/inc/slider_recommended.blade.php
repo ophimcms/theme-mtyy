@@ -20,15 +20,15 @@
                                     <span class="this-desc-score cor6"><i
                                             class="ds-shoucang fa"></i> {{$movie->getRatingStar()}}</span>
                                     <span>{{ $movie->publish_year }}</span>
-                                    {!! $movie->regions->map(function ($region) {
-                       return '<span>' . $region->name . '</span>';
-                   })->implode('') !!}
+                                           {!! $movie->regions->map(function ($region) {
+                                               return '<span>' . $region->name . '</span>';
+                                           })->implode('') !!}
                                     <span>{{$movie->episode_total}}</span>
                                 </div>
                                 <div class="this-desc-tags">
                                     {!! $movie->actors->map(function ($director) {
-                        return '  <span>' . $director->name . '</span>';
-                    })->implode('') !!}
+                                            return '  <span>' . $director->name . '</span>';
+                                        })->implode('') !!}
                                 </div>
                                 <div class="this-desc-item">　　
                                     {!! strip_tags($movie->content) !!}
