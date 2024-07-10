@@ -18,6 +18,20 @@
 @section('content')
     <div class="ds-vod-detail rel">
         <div class="box-width rel">
+            @if ($currentMovie->showtimes)
+                <div class="detail-score wow fadeInUp">
+                    <div class="play-sc cf">
+                        <p><strong>Lịch chiếu : </strong> {{$currentMovie->showtimes}}</p>
+                    </div>
+                </div>
+            @endif
+            @if ($currentMovie->notify )
+                <div class="detail-score wow fadeInUp">
+                    <div class="play-sc cf">
+                        <p><strong>Thông báo : </strong> {{$currentMovie->notify}}</p>
+                    </div>
+                </div>
+            @endif
             <div class="this-bj">
                 <div class="this-pic-bj"
                      style="background-image: url('{{ $currentMovie->getPosterUrl() }}')"></div>
