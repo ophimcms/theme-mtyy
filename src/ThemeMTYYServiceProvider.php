@@ -59,6 +59,14 @@ class ThemeMTYYServiceProvider extends ServiceProvider
                         'tab' => 'List'
                     ],
                     [
+                        'name' => 'home_page_slider_thumb',
+                        'label' => 'Home page slider thumb',
+                        'type' => 'text',
+                        'hint' => 'Label|relation|find_by_field|value|sort_by_field|sort_algo|limit|show_more_url',
+                        'value' => 'Phim mới cập nhật||is_copyright|0|updated_at|desc|24',
+                        'tab' => 'List'
+                    ],
+                    [
                         'name' => 'latest',
                         'label' => 'Home Page',
                         'type' => 'code',

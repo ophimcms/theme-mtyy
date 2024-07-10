@@ -50,6 +50,7 @@
         {!! get_theme_option('ads_header') !!}
     @endif
     @yield('slider_recommended')
+    @yield('home_page_slider_thumb')
     @yield('content')
 @endsection
 
