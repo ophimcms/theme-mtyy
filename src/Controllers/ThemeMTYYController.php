@@ -19,37 +19,12 @@ class ThemeMTYYController
 {
     public function index(Request $request)
     {
-        if ($request['search'] || $request['categorys']|| $request['years']|| $request['regions']|| $request['types']|| $request['sorts']) {
-            $data = Movie::when(!empty($request['categorys']), function ($movie) {
-                $movie->whereHas('categories', function ($categories) {
-                    $categories->where('id', request('categorys'));
-                });
-            })->when(!empty($request['regions']), function ($movie) {
-                $movie->whereHas('regions', function ($regions) {
-                    $regions->where('id', request('regions'));
-                });
-            })->when(!empty($request['years']), function ($movie) {
-                $movie->where('publish_year', request('years'));
-            })->when(!empty($request['types']), function ($movie) {
-                $movie->where('type', request('types'));
-            })->when(!empty($request['search']), function ($query) {
+        if ($request['search']) {
+            $data = Movie::when(!empty($request['search']), function ($query) {
                 $query->where(function ($query) {
                     $query->where('name', 'like', '%' . request('search') . '%')
                         ->orWhere('origin_name', 'like', '%' . request('search')  . '%');
                 })->orderBy('name', 'desc');
-            })->when(!empty($request['sorts']), function ($movie) {
-                if (request('sorts') == 'create') {
-                    return $movie->orderBy('created_at', 'desc');
-                }
-                if (request('sorts') == 'update') {
-                    return $movie->orderBy('updated_at', 'desc');
-                }
-                if (request('sorts') == 'year') {
-                    return $movie->orderBy('publish_year', 'desc');
-                }
-                if (request('sorts') == 'view') {
-                    return $movie->orderBy('view_total', 'desc');
-                }
             })->paginate(get_theme_option('per_page_limit'));
 
             return view('themes::thememtyy.catalog', [
@@ -296,7 +271,7 @@ class ThemeMTYYController
             $output = array();
             $movies = Movie::where('name', 'LIKE', '%' . $request->search . '%')->orWhere('origin_name', 'LIKE', '%' . $request->search . '%')->limit(5)->get();
             if ($movies) {
-                foreach ($movies as $key => $movie) {
+                foreach ($movies as $movie) {
                     $output[] = array(
                         'title' => $movie->name,
                         'original_title' => $movie->origin_name,
