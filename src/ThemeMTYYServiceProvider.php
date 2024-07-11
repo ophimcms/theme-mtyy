@@ -73,8 +73,8 @@ class ThemeMTYYServiceProvider extends ServiceProvider
                         'hint' => 'display_label|relation|find_by_field|value|limit|show_more_url|show_template (section_thumb|section_side)',
                         'value' => <<<EOT
                         Phim chiếu rạp||is_shown_in_theater|1|updated_at|desc|16|/danh-sach/phim-chieu-rap|section_thumb
-                        Phim bộ mới||type|series|updated_at|desc|14|/danh-sach/phim-bo|section_side
-                        Phim lẻ mới||type|single|updated_at|desc|14|/danh-sach/phim-le|section_side
+                        Phim bộ mới||type|series|updated_at|desc|16|/danh-sach/phim-bo|section_thumb
+                        Phim lẻ mới||type|single|updated_at|desc|16|/danh-sach/phim-le|section_thumb
                         Hoạt hình|categories|slug|hoat-hinh|updated_at|desc|14|/the-loai/hoat-hinh|section_side
                         EOT,
                         'attributes' => [
