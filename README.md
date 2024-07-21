@@ -5,7 +5,7 @@
     "repositories": [
         {
             "type": "git",
-            "url": "https://github.com/binhnguyen1998822/oPhimThemeMTYYLaravel.git"
+            "url": "https://github.com/ophimcms/theme-mtyy.git"
         }
     ],
     "require": {
