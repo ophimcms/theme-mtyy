@@ -24,7 +24,7 @@
     "extra": {
         "laravel": {
             "providers": [
-              "ThemeMTYYServiceProvider"
+              "Ophim\\ThemeMTYY\\ThemeMTYYServiceProvider"
             ]
         }
     },
