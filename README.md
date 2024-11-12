@@ -1,16 +1,7 @@
 # THEME - MTYY 2024 - OPHIM CMS
 
 ## Install
-
-    "repositories": [
-        {
-            "type": "git",
-            "url": "https://github.com/ophimcms/theme-mtyy.git"
-        }
-    ],
-    "require": {
-    "ophimcms/theme-mtyy": "*"
-    }
+`composer require ophimcms/theme-mtyy`
 1. Tại thư mục của Project: `composer update`
 2. Kích hoạt giao diện trong Admin Panel
 ## Requirements
