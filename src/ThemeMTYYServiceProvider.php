@@ -55,7 +55,7 @@ class ThemeMTYYServiceProvider extends ServiceProvider
                         'label' => 'Home page slider poster',
                         'type' => 'text',
                         'hint' => 'Label|relation|find_by_field|value|sort_by_field|sort_algo|limit',
-                        'value' => 'Slide||is_recommended|0|updated_at|desc|10',
+                        'value' => 'Slide||is_recommended|1|updated_at|desc|10',
                         'tab' => 'List'
                     ],
                     [
@@ -63,7 +63,7 @@ class ThemeMTYYServiceProvider extends ServiceProvider
                         'label' => 'Home page slider thumb',
                         'type' => 'text',
                         'hint' => 'Label|relation|find_by_field|value|sort_by_field|sort_algo|limit|show_more_url',
-                        'value' => 'Phim mới cập nhật||is_copyright|0|updated_at|desc|24',
+                        'value' => 'Phim mới cập nhật||is_copyright|0|updated_at|desc|24|#',
                         'tab' => 'List'
                     ],
                     [

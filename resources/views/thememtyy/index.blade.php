@@ -34,7 +34,7 @@
 		$data = null;
         if(trim($list)) {
 			$list = explode('|', $list);
-            [$label, $relation, $field, $val, $sortKey, $alg, $limit,$link] = array_merge($list, ['Phim mới cập nhật', '', 'is_copyright', '0', 'updated_at', 'desc', 20]);
+            [$label, $relation, $field, $val, $sortKey, $alg, $limit, $link] = array_merge($list, ['Phim mới cập nhật', '', 'is_copyright', '0', 'updated_at', 'desc', 20, '#']);
             try {
                 $data = [
                     'label' => $label,
@@ -59,7 +59,7 @@
     });
 
 
-       $data = Cache::remember('site.movies.latest', setting('site_cache_ttl', 5 * 60), function () {
+    $data = Cache::remember('site.movies.latest', setting('site_cache_ttl', 5 * 60), function () {
         $lists = preg_split('/[\n\r]+/', get_theme_option('latest'));
         $data = [];
         foreach ($lists as $list) {

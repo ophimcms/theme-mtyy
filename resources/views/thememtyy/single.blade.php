@@ -92,8 +92,7 @@
                 </div>
                 <div class="this-desc">
                     <div id="height_limit" class="text">
-                        <strong class="r6">Nội dung:</strong>　
-                        　 {!! strip_tags($currentMovie->content) !!}
+                        <strong class="r6">Nội dung:</strong> {!! strip_tags($currentMovie->content) !!}
                     </div>
                     <div class="text-open">
                         <span class="tim-bnt"><i class="fa r6 ease"></i>Xem thêm</span>

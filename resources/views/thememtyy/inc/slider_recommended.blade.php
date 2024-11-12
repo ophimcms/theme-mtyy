@@ -23,7 +23,7 @@
                                            {!! $movie->regions->map(function ($region) {
                                                return '<span>' . $region->name . '</span>';
                                            })->implode('') !!}
-                                    <span>{{$movie->episode_total}}</span>
+                                    <span>{{$movie->episode_current}}</span>
                                 </div>
                                 <div class="this-desc-tags">
                                     {!! $movie->actors->map(function ($director) {
@@ -32,6 +32,9 @@
                                 </div>
                                 <div class="this-desc-item">　　
                                     {!! strip_tags($movie->content) !!}
+                                </div>
+                                <div class="this-desc-bnt flex">
+                                    <span href="{{$movie->getUrl()}}" class="bj2 ho cr5"><i class="fa ds-bofang1"></i></span>
                                 </div>
                             </div>
                         </div>

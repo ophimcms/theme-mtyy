@@ -1,7 +1,7 @@
 # THEME - MTYY 2024 - OPHIM CMS
 
 ## Install
-    `composer require ophimcms/theme-mtyy`
+    composer require ophimcms/theme-mtyy
 2. Kích hoạt giao diện trong Admin Panel
 ## Requirements
 https://github.com/hacoidev/ophim-core
